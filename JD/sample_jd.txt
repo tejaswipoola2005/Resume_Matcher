@@ -1,0 +1,5 @@
+Programming Languages: C++, Java, C, JavaScript, Python
+Web Development: HTML, CSS, JavaScript, in MERN Stack (MongoDB, Express, Node.js)
+Systems and Tools:  Git, GitHub, Linux
+Concepts: Object Oriented Programming (OOPS), REST APIs
+CS Fundamentals: Data Structures and Algorithms, DBMS
