@@ -77,17 +77,22 @@ HF_API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
 HF_API_KEY = "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"  # replace with your key
 
 headers = {"Authorization": f"Bearer {HF_API_KEY}"}
-
 def hf_suggestions(missing_skills):
     prompt = f"""
     The candidate's resume is missing these skills: {', '.join(missing_skills)}.
     Suggest ways to improve the resume to match the job description better.
     """
     response = requests.post(HF_API_URL, headers=headers, json={"inputs": prompt})
-    try:
-        return response.json()[0]['generated_text']
-    except:
-        return "AI suggestion not available at the moment."
+    result = response.json()
+    st.write("🔍 Raw Hugging Face response:", result)  # DEBUG OUTPUT
+    
+    if isinstance(result, list) and "generated_text" in result[0]:
+        return result[0]["generated_text"]
+    elif "error" in result:
+        return f"⚠️ API Error: {result['error']}"
+    else:
+        return "⚠️ Unexpected response format."
+
 
 # ----------------- STREAMLIT APP -----------------
 st.title("📄 Resume JD Match Checker with AI Feedback (Hugging Face API)")
