@@ -4,6 +4,8 @@ from docx import Document
 import nltk
 import streamlit as st
 import requests
+import os
+
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -74,7 +76,7 @@ def jd_coverage_score(jd_keywords, resume_text):
 
 # ----------------- Hugging Face AI Suggestions -----------------
 HF_API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-small"
-HF_API_KEY = "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"  # replace with your key
+HF_API_KEY =os.getenv('HF_KEY')  # replace with your key
 
 headers = {"Authorization": f"Bearer {HF_API_KEY}"}
 def hf_suggestions(missing_skills):
